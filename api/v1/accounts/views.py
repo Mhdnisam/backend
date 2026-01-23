@@ -45,3 +45,20 @@ class LogoutView(APIView):
                 {"error": "Invalid refresh token"},
                 status=status.HTTP_400_BAD_REQUEST
             )
+
+from django.contrib.auth.models import User
+from rest_framework.permissions import AllowAny
+
+class CreateAdminView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        if User.objects.filter(username="admin").exists():
+            return Response({"message": "Admin already exists"})
+
+        User.objects.create_superuser(
+            username="admin",
+            email="admin@example.com",
+            password="admin@123"
+        )
+        return Response({"message": "Admin user created"})
