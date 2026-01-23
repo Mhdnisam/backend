@@ -49,6 +49,9 @@ class LogoutView(APIView):
 from django.contrib.auth.models import User
 from rest_framework.permissions import AllowAny
 
+from django.contrib.auth.models import User
+from rest_framework.permissions import AllowAny
+
 class CreateAdminView(APIView):
     permission_classes = [AllowAny]
 
