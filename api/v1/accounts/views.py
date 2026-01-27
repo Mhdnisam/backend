@@ -1,29 +1,30 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status, permissions
+from rest_framework import status
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
+
 from .serializers import SignupSerializer
-from rest_framework.permissions import AllowAny
 
 
 class SignupView(APIView):
-    permission_classes = [permissions.AllowAny]
-    permission_classes = [AllowAny]
+    permission_classes = [AllowAny]   # ✅ Public signup
 
     def post(self, request):
         serializer = SignupSerializer(data=request.data)
+
         if serializer.is_valid():
             serializer.save()
             return Response(
                 {"message": "User created successfully"},
                 status=status.HTTP_201_CREATED
             )
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
 class LogoutView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticated]   # ✅ Must be logged in
 
     def post(self, request):
         try:
@@ -43,9 +44,8 @@ class LogoutView(APIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        except Exception as e:
+        except Exception:
             return Response(
                 {"error": "Invalid token or already blacklisted"},
                 status=status.HTTP_400_BAD_REQUEST
             )
-        
