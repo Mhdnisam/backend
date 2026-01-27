@@ -1,7 +1,7 @@
 from pathlib import Path
 from datetime import timedelta
 import os
-import dj_database_url
+# import dj_database_url
 
 # --------------------------------------------------
 # BASE
@@ -96,6 +96,13 @@ DATABASES = {
         ssl_require=True
     )
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 # --------------------------------------------------
 # PASSWORD VALIDATION
