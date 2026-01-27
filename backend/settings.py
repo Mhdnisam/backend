@@ -20,6 +20,10 @@ ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = [
     "https://*.onrender.com",
 ]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",
+    "https://your-frontend-domain.com",
+]
 
 # --------------------------------------------------
 # APPLICATIONS
