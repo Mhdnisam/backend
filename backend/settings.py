@@ -15,14 +15,17 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "unsafe-secret-for-local")
 
 DEBUG = os.environ.get("DEBUG") == "True"
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [
+    "backend-orcw.onrender.com",
+    "localhost",
+    "127.0.0.1",]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://*.onrender.com",
+    "https://backend-orcw.onrender.com",
 ]
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
-    "https://your-frontend-domain.com",
 ]
 
 # --------------------------------------------------
