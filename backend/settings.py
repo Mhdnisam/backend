@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # --------------------------------------------------
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "unsafe-secret-for-local")
 
-DEBUG = os.environ.get("DEBUG") == "True"
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = [
     "backend-orcw.onrender.com",
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'accounts',
+    'products',
     'api',
 
     'rest_framework_simplejwt.token_blacklist',
@@ -96,13 +97,13 @@ TEMPLATES = [
 # --------------------------------------------------
 # DATABASE (POSTGRES via Render)
 # --------------------------------------------------
-DATABASES = {
-    'default': dj_database_url.config(
-        default=os.environ.get("DATABASE_URL"),
-        conn_max_age=600,
-        ssl_require=True
-    )
-}
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=os.environ.get("DATABASE_URL"),
+#         conn_max_age=600,
+#         ssl_require=True
+#     )
+# }
 
 # DATABASES = {
 #     'default': {
@@ -110,6 +111,24 @@ DATABASES = {
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+    DATABASES = {
+        'default': dj_database_url.config(
+            conn_max_age=600,
+            ssl_require=True
+        )
+    }
+
+
 
 # --------------------------------------------------
 # PASSWORD VALIDATION

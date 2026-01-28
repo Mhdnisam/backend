@@ -8,8 +8,9 @@ from .serializers import SignupSerializer
 
 
 class SignupView(APIView):
-    authentication_classes = []
-    permission_classes = [AllowAny]   # ✅ Public signup
+
+    authentication_classes = []       
+    permission_classes = [AllowAny]    
 
     def post(self, request):
         serializer = SignupSerializer(data=request.data)
