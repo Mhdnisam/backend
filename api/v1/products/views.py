@@ -2,15 +2,19 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.permissions import IsAuthenticated
 from products.models import Product
 from .serializers import ProductListSerializer, ProductDetailSerializer
-from rest_framework.permissions import AllowAny
 
-class ProductListAPIView(ListAPIView):
+from rest_framework.generics import ListCreateAPIView
+
+class ProductListAPIView(ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductListSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
 
-class ProductDetailAPIView(RetrieveAPIView):
+from rest_framework.generics import RetrieveUpdateDestroyAPIView
+
+class ProductDetailAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductDetailSerializer
     permission_classes = [IsAuthenticated]
+
