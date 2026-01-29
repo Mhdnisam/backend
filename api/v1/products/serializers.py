@@ -1,8 +1,6 @@
 from rest_framework import serializers
 from products.models import Product
-from products.models import Product
 
-from rest_framework import serializer
 
 class ProductListSerializer(serializers.ModelSerializer):
     image_url = serializers.SerializerMethodField()
@@ -19,7 +17,6 @@ class ProductListSerializer(serializers.ModelSerializer):
 
         # ✅ Fixed default image
         return request.build_absolute_uri("/static/products/default.jpg")
-
 
 
 class ProductDetailSerializer(serializers.ModelSerializer):
