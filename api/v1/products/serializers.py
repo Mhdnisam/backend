@@ -1,9 +1,8 @@
 from rest_framework import serializers
 from products.models import Product
+from products.models import Product
 
-
-from rest_framework import serializers
-from .models import Product
+from rest_framework import serializer
 
 class ProductListSerializer(serializers.ModelSerializer):
     image_url = serializers.SerializerMethodField()
